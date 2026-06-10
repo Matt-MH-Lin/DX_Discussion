@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>祥圃集團 2026 數位轉型討論框架與溝通畫布</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Noto Sans TC & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nicegarden: {
+                            50: '#F5F7F2',     // 燕麥草白
+                            100: '#E6EAD8',    // 鼠尾草灰綠
+                            200: '#CAD3B0',    // 淺苔綠
+                            300: '#A4B384',    // 茶葉綠
+                            400: '#7B8F55',    // 柳綠
+                            500: '#546A36',    // 森林苔綠 (祥圃主品牌色)
+                            600: '#3D5025',    // 深松綠
+                            700: '#2E3E1C',    // 蔭松綠
+                            800: '#1F2A13',    // 肥沃腐植土褐
+                            900: '#151C0C',    // 暗夜森林
+                            accent: '#C97A44',  // 溫潤陶土橘 (Terracotta Accent)
+                            clay: '#A2592B',    // 深褐土
+                            sand: '#EFECE3'     // 暖沙色
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #FAF8F4; /* 大自然暖沙底色 */
+        }
+        .active-glow {
+            box-shadow: 0 0 15px rgba(84, 106, 54, 0.4);
+            border-color: #546A36 !important;
+        }
+        .active-scenario-highlight {
+            animation: pulse-border 2s infinite;
+        }
+        @keyframes pulse-border {
+            0% { border-color: rgba(201, 122, 68, 0.3); box-shadow: 0 0 0 0px rgba(201, 122, 68, 0.3); }
+            70% { border-color: rgba(201, 122, 68, 1); box-shadow: 0 0 0 8px rgba(201, 122, 68, 0); }
+            100% { border-color: rgba(201, 122, 68, 0.3); box-shadow: 0 0 0 0px rgba(201, 122, 68, 0); }
+        }
+        @keyframes bounce-subtle {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -6px); }
+        }
+        .animate-bounce-subtle {
+            animation: bounce-subtle 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="border-b border-nicegarden-100 bg-white sticky top-0 z-30 shadow-sm px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <!-- Brand Logo & Title -->
+            <div class="flex items-center space-x-4">
+                <!-- NiceGarden Stylized Logo -->
+                <div class="w-12 h-12 bg-nicegarden-600 rounded-xl flex items-center justify-center text-white font-black text-2xl shadow-md border-2 border-nicegarden-200">
+                    <svg viewBox="0 0 100 100" class="w-8 h-8 fill-current text-nicegarden-100">
+                        <path d="M20 20 L20 80 L35 80 L35 45 L65 80 L80 80 L80 20 L65 20 L65 55 L35 20 Z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-tight text-nicegarden-800 flex items-center gap-2">
+                        祥圃集團 Nice Garden
+                        <span class="text-xs bg-nicegarden-100 text-nicegarden-700 px-2.5 py-0.5 rounded-full font-bold">永續農食生態圈</span>
+                    </h1>
+                    <p class="text-xs text-nicegarden-500 font-medium tracking-wider">邁向代理型組織與自主企業 (Agentic Enterprise) 決策溝通框架</p>
+                </div>
+            </div>
+
+            <!-- Chairman Kevin Span of Control Tracker -->
+            <div class="bg-nicegarden-50 border border-nicegarden-200 rounded-2xl px-5 py-3 flex items-center justify-between gap-6 shadow-sm">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-nicegarden-accent animate-pulse"></span>
+                        <h4 class="text-xs font-bold text-nicegarden-800 tracking-wide uppercase">董事長決策與省工總效益</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-0.5">目標：管理跨度收斂至 5-7 主管，人工成本大幅降本</p>
+                </div>
+                <div class="flex items-center gap-4 text-right">
+                    <div>
+                        <span id="span-of-control-val" class="text-2xl font-black text-nicegarden-600 transition-all duration-500">20</span>
+                        <span class="text-xs font-bold text-nicegarden-800">主管人</span>
+                        <div class="text-[9px] text-nicegarden-700 bg-nicegarden-100 px-1.5 py-0.5 rounded font-extrabold mt-1">管理幅度優化: <span id="span-optimization-rate">0%</span></div>
+                    </div>
+                    <div class="border-l border-nicegarden-200 pl-4">
+                        <span id="accumulated-hours-val" class="text-2xl font-black text-nicegarden-accent transition-all duration-500">0</span>
+                        <span class="text-xs font-bold text-nicegarden-800">工時/月</span>
+                        <div class="text-[9px] text-nicegarden-700 bg-nicegarden-100 px-1.5 py-0.5 rounded font-extrabold mt-1">累計省工效益</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex items-center gap-2">
+                <button onclick="openScenarioModal()" class="bg-nicegarden-100 hover:bg-nicegarden-200 text-nicegarden-800 text-sm font-bold px-4 py-2.5 rounded-xl transition duration-200 flex items-center gap-2 border border-nicegarden-300 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-nicegarden-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    情境決策模擬器
+                </button>
+                <button onclick="resetSimulationOnly()" class="bg-nicegarden-600 hover:bg-nicegarden-700 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition duration-200 shadow-sm" title="還原演練狀態，完全保留您的自訂資料">
+                    重置模擬
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- WORKSPACE OVERVIEW / CONTROL PANEL -->
+    <section class="bg-gradient-to-r from-nicegarden-800 to-nicegarden-900 text-white px-6 py-4 shadow-inner border-b border-nicegarden-700">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-1">
+                <span class="text-[10px] bg-nicegarden-accent text-white font-black px-2.5 py-0.5 rounded-full uppercase tracking-widest">IOC 智慧營運中心決策面板</span>
+                <h2 class="text-lg font-bold">與 Kevin 董事長及 BU 主管對齊：「我們有哪些？缺了什麼？右側需要什麼？」</h2>
+                <p class="text-xs text-nicegarden-200">排查系統資料鏈與自訂優化 Agent。重置模擬僅清除亮點，新增的討論成果與自訂任務可永續存續為共識決議。</p>
+            </div>
+            
+            <!-- Quick filters for Left Column -->
+            <div class="flex flex-wrap gap-2 items-center">
+                <span class="text-xs text-nicegarden-100 font-medium">數據源篩選：</span>
+                <button onclick="setSourceFilter('all')" id="filter-all" class="px-3 py-1 rounded-lg text-xs font-bold bg-white text-nicegarden-800 shadow transition">全部</button>
+                <button onclick="setSourceFilter('existing')" id="filter-existing" class="px-3 py-1 rounded-lg text-xs font-bold bg-nicegarden-700 text-nicegarden-200 hover:bg-nicegarden-600 transition">已建置</button>
+                <button onclick="setSourceFilter('missing')" id="filter-missing" class="px-3 py-1 rounded-lg text-xs font-bold bg-nicegarden-700 text-nicegarden-200 hover:bg-nicegarden-600 transition">待增補</button>
+                <button onclick="setSourceFilter('auto')" id="filter-auto" class="px-3 py-1 rounded-lg text-xs font-bold bg-nicegarden-700 text-nicegarden-200 hover:bg-nicegarden-600 transition">SaaS自動</button>
+                <button onclick="setSourceFilter('manual')" id="filter-manual" class="px-3 py-1 rounded-lg text-xs font-bold bg-nicegarden-700 text-nicegarden-200 hover:bg-nicegarden-600 transition">手工作業</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CANVA: 3-COLUMN ARCHITECTURE -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- LEFT COLUMN: DATA SOURCES (數據源) - 4 cols -->
+        <section class="lg:col-span-4 bg-white border border-nicegarden-100 rounded-2xl p-5 shadow-sm flex flex-col">
+            <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-xl bg-nicegarden-50 flex items-center justify-center text-nicegarden-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-nicegarden-800 text-base">左側：供應鏈數據源</h3>
+                        <p class="text-[11px] text-slate-500">梳理現有系統與手工作業斷點</p>
+                    </div>
+                </div>
+                <button onclick="openAddSourceModal()" class="bg-nicegarden-600 hover:bg-nicegarden-700 text-white text-xs font-bold px-2.5 py-1.5 rounded-lg transition duration-150 flex items-center gap-1 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                    新增數據
+                </button>
+            </div>
+
+            <!-- Subcategories description -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div class="bg-blue-50 border border-blue-100 rounded-xl p-2.5 text-center">
+                    <span class="text-[10px] font-bold text-blue-700 uppercase tracking-wide">系統 & SaaS</span>
+                    <p class="text-[10px] text-blue-500 mt-0.5">自動生成/僅需串接</p>
+                </div>
+                <div class="bg-nicegarden-100/50 border border-nicegarden-200/60 rounded-xl p-2.5 text-center">
+                    <span class="text-[10px] font-bold text-nicegarden-700 uppercase tracking-wide">手工作業/Excel</span>
+                    <p class="text-[10px] text-nicegarden-600 mt-0.5">需系統化與流程重塑</p>
+                </div>
+            </div>
+
+            <!-- Dynamic Source List -->
+            <div id="source-list-container" class="space-y-3 overflow-y-auto flex-grow max-h-[550px] pr-1">
+                <!-- Javascript will render nodes here -->
+            </div>
+        </section>
+
+        <!-- MIDDLE COLUMN: CLOUD MIDDLEWARE / SI PARTNERS (數據湖倉與整合) - 4 cols -->
+        <section class="lg:col-span-4 bg-white border border-nicegarden-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+            <div>
+                <div class="flex items-center space-x-2 mb-4 border-b border-slate-100 pb-3">
+                    <div class="w-8 h-8 rounded-xl bg-nicegarden-50 flex items-center justify-center text-nicegarden-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-nicegarden-800 text-base">中間：數據湖倉與雲端/SI</h3>
+                        <p class="text-[11px] text-slate-500">串接基石與挑選合作夥伴</p>
+                    </div>
+                </div>
+
+                <!-- Cloud Selector -->
+                <div class="space-y-3 mb-6">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wide block">選擇雲端服務與 SI 整合商</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <!-- AWS Card -->
+                        <button onclick="selectCloud('aws')" id="cloud-aws" class="p-3 border-2 border-nicegarden-500 bg-nicegarden-50 rounded-xl text-left transition duration-200 flex flex-col justify-between h-20 active-glow">
+                            <span class="text-xs font-extrabold text-nicegarden-800">Amazon AWS</span>
+                            <span class="text-[10px] text-nicegarden-600 font-medium">IoT, Bedrock & Workshop</span>
+                        </button>
+                        <!-- WiAdvance / SI Card -->
+                        <button onclick="selectCloud('si')" id="cloud-si" class="p-3 border border-slate-200 bg-slate-50 hover:bg-slate-100 rounded-xl text-left transition duration-200 flex flex-col justify-between h-20">
+                            <span class="text-xs font-bold text-slate-700">緯謙 / 外部SI夥伴</span>
+                            <span class="text-[10px] text-slate-500">雲地整合與系統客製</span>
+                        </button>
+                        <!-- Azure Card -->
+                        <button onclick="selectCloud('azure')" id="cloud-azure" class="p-3 border border-slate-200 bg-slate-50 hover:bg-slate-100 rounded-xl text-left transition duration-200 flex flex-col justify-between h-20">
+                            <span class="text-xs font-bold text-slate-700">MS Azure</span>
+                            <span class="text-[10px] text-slate-500">Power Platform & OpenAI</span>
+                        </button>
+                        <!-- GCP Card -->
+                        <button onclick="selectCloud('gcp')" id="cloud-gcp" class="p-3 border border-slate-200 bg-slate-50 hover:bg-slate-100 rounded-xl text-left transition duration-200 flex flex-col justify-between h-20">
+                            <span class="text-xs font-bold text-slate-700">Google Cloud</span>
+                            <span class="text-[10px] text-slate-500">Vertex AI & BigQuery</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Middle infrastructure details -->
+                <div class="bg-nicegarden-50/50 rounded-2xl p-4 border border-nicegarden-100 space-y-4">
+                    <h4 class="text-xs font-bold text-nicegarden-800 uppercase tracking-wide">CHOHO Cloud (究好雲) 2.0 中台引擎</h4>
+                    
+                    <!-- Dynamic details depending on selected Cloud Provider -->
+                    <div id="cloud-details-container" class="space-y-3">
+                        <!-- JS Dynamic Injection -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inter-column flow illustration -->
+            <div class="mt-6 pt-4 border-t border-slate-100 text-center">
+                <div class="inline-flex items-center space-x-1 text-nicegarden-700 bg-nicegarden-50 px-3 py-1.5 rounded-full text-xs font-bold border border-nicegarden-200">
+                    <span>究好雲 2.0 整合與對齊</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-nicegarden-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: RESULTS & DECISION TOOLS (管理層應用與成果) - 4 cols -->
+        <section class="lg:col-span-4 bg-white border border-nicegarden-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+            <div>
+                <!-- Top Section: Dynamic Outcomes Requirements -->
+                <div>
+                    <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-xl bg-orange-50 flex items-center justify-center text-nicegarden-accent">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                            </div>
+                            <h3 class="font-bold text-nicegarden-800 text-base">右側：管理層決策與成果</h3>
+                        </div>
+                        <button onclick="openAddOutcomeModal()" class="bg-nicegarden-accent hover:bg-amber-600 text-white text-xs font-bold px-2.5 py-1.5 rounded-lg transition duration-150 flex items-center gap-1 shadow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                            新增需求
+                        </button>
+                    </div>
+
+                    <!-- Right Column Outcome Filter Bar -->
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <button onclick="setOutcomeFilter('all')" id="out-filter-all" class="px-2 py-0.5 rounded text-[10px] font-bold bg-nicegarden-500 text-white transition">全部</button>
+                        <button onclick="setOutcomeFilter('green')" id="out-filter-green" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">即時回報</button>
+                        <button onclick="setOutcomeFilter('amber')" id="out-filter-amber" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">知識庫/RAG</button>
+                        <button onclick="setOutcomeFilter('custom')" id="out-filter-custom" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">自訂需求</button>
+                    </div>
+
+                    <!-- Right Dynamic Outcomes Container -->
+                    <div id="outcome-list-container" class="space-y-3 mb-4 max-h-[180px] overflow-y-auto pr-1">
+                        <!-- Dynamic outcomes will render here -->
+                    </div>
+                </div>
+
+                <!-- Bottom Section: Dynamic AI Agents with filtering -->
+                <div class="space-y-2 mt-4 pt-4 border-t border-slate-200">
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wide block">授權 AI Agent 代理任務（累積工時與幅度效益）</label>
+                        <button onclick="openAddAgentModal()" class="text-[11px] text-nicegarden-600 hover:text-nicegarden-700 font-extrabold flex items-center gap-1 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                            新增 Agent
+                        </button>
+                    </div>
+
+                    <!-- Agent Filter Bar (NEW BU FILTERING!) -->
+                    <div class="flex flex-wrap gap-1 mb-2">
+                        <button onclick="setAgentFilter('all')" id="agent-filter-all" class="px-2 py-0.5 rounded text-[10px] font-bold bg-nicegarden-500 text-white transition">全部</button>
+                        <button onclick="setAgentFilter('動保')" id="agent-filter-動保" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">動保</button>
+                        <button onclick="setAgentFilter('良作')" id="agent-filter-良作" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">良作</button>
+                        <button onclick="setAgentFilter('品鮮')" id="agent-filter-品鮮" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">品鮮</button>
+                        <button onclick="setAgentFilter('總部')" id="agent-filter-總部" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">總部</button>
+                    </div>
+                    
+                    <!-- Dynamic AI Agent List Container -->
+                    <div id="agent-list-container" class="space-y-2.5 max-h-[220px] overflow-y-auto pr-1">
+                        <!-- Dynamic agent items are injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ultimate Goal Statement -->
+            <div class="bg-nicegarden-50 p-3 rounded-xl border border-nicegarden-100 mt-4 text-center">
+                <p class="text-[11px] text-nicegarden-600 font-medium">以終為始的終極目的 (Objective)</p>
+                <h4 class="text-xs font-extrabold text-nicegarden-800 mt-0.5">釋放高層管理負載，建構自主化農食企業</h4>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- GUIDELINE SUMMARY -->
+    <footer class="bg-white border-t border-slate-200 px-6 py-5 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div class="space-y-1">
+                <h4 class="text-xs font-extrabold text-nicegarden-700 tracking-wider uppercase">💡 董事會溝通教戰指引 (IOC 智慧營運中心備忘錄)</h4>
+                <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500">
+                    <span>1. <strong>管理財是基本</strong>：以 SAP 為核心，清洗數據以支撐 IPO 內稽內控。</span>
+                    <span>2. <strong>數據治理優先</strong>：2026年應花 40% 精力做 MDM 主數據標準化。</span>
+                    <span>3. <strong>AWS 與 SI 夥伴</strong>：緯謙協助地端系統安全微服務化，AWS 則引導 Workshop 以防架構被地端軟硬體鎖死。</span>
+                </div>
+            </div>
+            <!-- Backup Actions -->
+            <div class="flex items-center gap-2">
+                <button onclick="exportJSON()" class="text-slate-600 hover:text-slate-800 text-xs font-semibold px-3 py-1.5 border border-slate-200 rounded-lg hover:bg-slate-50 transition">
+                    導出數據設定 (JSON)
+                </button>
+                <button onclick="completelyResetLocalStorage()" class="bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold px-3 py-1.5 rounded-lg transition" title="清空全部自訂資料，還原為初始預設值">
+                    清除所有資料，還原出廠範本
+                </button>
+                <span class="text-xs text-slate-400">© 2026 祥圃集團智慧營運中心 IOC</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCENARIO SIMULATION PERSISTENT FLOATING PANEL (場景決策演示控制) -->
+    <div id="scenario-control-bar" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 max-w-2xl w-[92%] bg-nicegarden-900 border-2 border-nicegarden-accent text-white p-5 rounded-2xl shadow-2xl z-50 animate-bounce-subtle items-center justify-between gap-4">
+        <div class="space-y-1">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-nicegarden-accent animate-ping"></span>
+                <span class="text-xs font-bold text-nicegarden-accent tracking-widest uppercase">智慧決策場景演練播放中</span>
+            </div>
+            <h4 id="scenario-bar-title" class="text-sm font-extrabold text-white">良作分切成本專案</h4>
+            <p id="scenario-bar-desc" class="text-xs text-nicegarden-200">正在展示數據流動路徑...</p>
+        </div>
+        <button onclick="stopScenario()" class="flex-shrink-0 bg-nicegarden-accent hover:bg-nicegarden-clay text-white text-xs font-black px-4 py-2.5 rounded-xl shadow-md transition duration-150">
+            結束演練並關閉
+        </button>
+    </div>
+
+    <!-- ADD/EDIT SOURCE MODAL (LEFT COLUMN) -->
+    <div id="source-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4 transition-all duration-300">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 flex flex-col">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                <h3 id="modal-title" class="font-bold text-slate-800 text-lg">編輯數據源節點</h3>
+                <button onclick="closeSourceModal()" class="text-slate-400 hover:text-slate-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <!-- Modal Form -->
+            <form id="source-form" onsubmit="saveSource(event)" class="space-y-4">
+                <input type="hidden" id="modal-source-id">
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">系統 / 資料名稱</label>
+                    <input type="text" id="modal-source-name" required class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="例如：良作 WMS">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">對應事業處 (BU)</label>
+                    <select id="modal-source-bu" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500">
+                        <option value="動保">動保事業處 (精料/客情)</option>
+                        <option value="良作">良作事業處 (分切/生鮮/肉品)</option>
+                        <option value="品鮮">品鮮事業處 (門市/電商/璞食)</option>
+                        <option value="總部">集團總部/跨部門系統</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">採集類型</label>
+                        <select id="modal-source-type" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500">
+                            <option value="auto">系統自動化 (SaaS)</option>
+                            <option value="manual">手工作業 (待優化)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">目前狀態</label>
+                        <select id="modal-source-status" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500">
+                            <option value="existing">已建置</option>
+                            <option value="missing">待增補 (Missing)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">說明 / 數據治理重點</label>
+                    <textarea id="modal-source-desc" rows="3" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="描述此系統產出的核心數據特點..."></textarea>
+                </div>
+
+                <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-6">
+                    <button type="button" id="modal-delete-btn" onclick="deleteSourceClick()" class="bg-red-50 hover:bg-red-100 text-red-600 text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                        刪除此節點
+                    </button>
+                    <div class="flex space-x-2">
+                        <button type="button" onclick="closeSourceModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                            取消
+                        </button>
+                        <button type="submit" class="bg-nicegarden-600 hover:bg-nicegarden-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                            儲存變更
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD/EDIT OUTCOME MODAL (RIGHT COLUMN) -->
+    <div id="outcome-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4 transition-all duration-300">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 flex flex-col">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                <h3 id="outcome-modal-title" class="font-bold text-slate-800 text-lg">編輯決策成果與需求</h3>
+                <button onclick="closeOutcomeModal()" class="text-slate-400 hover:text-slate-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <!-- Outcome Form -->
+            <form id="outcome-form" onsubmit="saveOutcome(event)" class="space-y-4">
+                <input type="hidden" id="modal-outcome-id">
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">決策成果 / 需求名稱</label>
+                    <input type="text" id="modal-outcome-name" required class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="例如：IOC 智慧營運戰情室">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">標籤 (如：即時回報 / RAG / 自訂)</label>
+                        <input type="text" id="modal-outcome-badge" required class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="即時回報">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">卡片底色風格 (對應篩選類別)</label>
+                        <select id="modal-outcome-style" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500">
+                            <option value="green">即時回報風格 (NiceGarden)</option>
+                            <option value="amber">知識庫RAG風格 (Amber)</option>
+                            <option value="blue">穩重商務藍 (Blue)</option>
+                            <option value="slate">低調自訂灰 (Slate)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">成果描述與應用場景</label>
+                    <textarea id="modal-outcome-desc" rows="3" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="請描述管理層如何透過此工具達成數據治理與決策..."></textarea>
+                </div>
+
+                <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-6">
+                    <button type="button" id="modal-outcome-delete-btn" onclick="deleteOutcomeClick()" class="bg-red-50 hover:bg-red-100 text-red-600 text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                        刪除此需求
+                    </button>
+                    <div class="flex space-x-2">
+                        <button type="button" onclick="closeOutcomeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                            取消
+                        </button>
+                        <button type="submit" class="bg-nicegarden-600 hover:bg-nicegarden-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                            儲存需求
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD/EDIT AGENT MODAL (RIGHT COLUMN) -->
+    <div id="agent-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4 transition-all duration-300">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                <h3 id="agent-modal-title" class="font-bold text-slate-800 text-lg">編輯 AI Agent 代理任務</h3>
+                <button onclick="closeAgentModal()" class="text-slate-400 hover:text-slate-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <!-- Agent Form -->
+            <form id="agent-form" onsubmit="saveAgent(event)" class="space-y-4">
+                <input type="hidden" id="modal-agent-id">
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Agent 任務名稱</label>
+                    <input type="text" id="modal-agent-name" required class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="例如：良作實時成本 MES 決策">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">代理任務描述與優化工作流</label>
+                    <textarea id="modal-agent-desc" required rows="2" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="例如：打通 SAP 與 WMS，自動分析並得出肉品分切得率與加工工時..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">提報/需求事業處 (BU)</label>
+                        <select id="modal-agent-bu" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500">
+                            <option value="動保">動保事業處</option>
+                            <option value="良作">良作事業處</option>
+                            <option value="品鮮">品鮮事業處</option>
+                            <option value="總部">集團總部</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">預估能收斂直屬匯報幅度</label>
+                        <select id="modal-agent-savings" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500">
+                            <option value="3">減少 3 位匯報主管人 (高價值核心流程)</option>
+                            <option value="2">減少 2 位匯報主管人 (中度整合流程)</option>
+                            <option value="1">減少 1 位匯報主管人 (輔助決策工具)</option>
+                            <option value="0">僅作為日常事務輔助 (0 人)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Business Activities Selector (複選與自訂新增) -->
+                <div>
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">對應營運活動類型 (複選)</label>
+                        <span class="text-[10px] text-nicegarden-600 font-medium">*可自訂輸入新選項</span>
+                    </div>
+                    
+                    <!-- Predefined/Existing dynamic activities checkboxes -->
+                    <div id="activity-checkbox-container" class="flex flex-wrap gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100 max-h-[110px] overflow-y-auto">
+                        <!-- JS Dynamically inject activity checkboxes -->
+                    </div>
+
+                    <!-- Custom Activity Input Box -->
+                    <div class="flex gap-2 mt-2">
+                        <input type="text" id="modal-custom-activity-input" class="flex-grow border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-nicegarden-500" placeholder="自行輸入其他營運活動（如：冷鏈物流）">
+                        <button type="button" onclick="addNewActivityOption()" class="bg-nicegarden-100 hover:bg-nicegarden-200 text-nicegarden-800 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                            ＋ 新增活動選項
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">預估能節省的人工小時 (小時/月)</label>
+                    <input type="number" id="modal-agent-hours" required min="0" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="例如：120">
+                </div>
+
+                <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-6">
+                    <button type="button" id="modal-agent-delete-btn" onclick="deleteAgentClick()" class="bg-red-50 hover:bg-red-100 text-red-600 text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                        刪除此任務
+                    </button>
+                    <div class="flex space-x-2">
+                        <button type="button" onclick="closeAgentModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                            取消
+                        </button>
+                        <button type="submit" class="bg-nicegarden-600 hover:bg-nicegarden-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                            儲存任務
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN SCENARIO SELECTION & MANAGEMENT MODAL (情境決策模擬器) -->
+    <div id="scenario-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4 transition-all duration-300">
+        <div class="bg-white rounded-2xl max-w-3xl w-full p-6 shadow-2xl border border-slate-100 flex flex-col max-h-[85vh]">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                <div class="flex items-center space-x-2">
+                    <span class="p-1.5 rounded-lg bg-nicegarden-100 text-nicegarden-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                    </span>
+                    <h3 class="font-black text-nicegarden-800 text-lg">與董事長 Kevin 對齊：數位轉型模擬情境</h3>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <!-- Dynamic Create Scenario Button -->
+                    <button onclick="openAddScenarioModal()" class="bg-nicegarden-accent hover:bg-amber-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                        新增自訂場景
+                    </button>
+                    <button onclick="closeScenarioModal()" class="text-slate-400 hover:text-slate-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-500 mb-4">點選下方營運痛點或討論場景，系統將自動點亮「需要串接哪些數據源（左）」、「透過 雲端中台什麼模組整合（中）」、以及「最終解決什麼決策痛點（右）」：</p>
+
+            <!-- Scenario Selection Grid -->
+            <div id="scenario-grid-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6 overflow-y-auto pr-1 flex-grow">
+                <!-- Javascript will render custom + default scenarios here -->
+            </div>
+
+            <div class="flex justify-end border-t border-slate-100 pt-4">
+                <button type="button" onclick="closeScenarioModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold px-5 py-2.5 rounded-xl transition shadow-sm">
+                    關閉
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DYNAMIC SCENARIO EDITOR MODAL (LEFT-MIDDLE-RIGHT BUILDER!) -->
+    <div id="scenario-editor-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4 transition-all duration-300">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                <h3 id="scenario-editor-title" class="font-bold text-slate-800 text-lg">新增自訂決策場景</h3>
+                <button onclick="closeScenarioEditorModal()" class="text-slate-400 hover:text-slate-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <!-- Scenario Editor Form -->
+            <form id="scenario-editor-form" onsubmit="saveScenario(event)" class="space-y-4">
+                <input type="hidden" id="modal-scenario-id">
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">場景名稱</label>
+                    <input type="text" id="modal-scenario-name" required class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="例如：場景五：自有豬場智慧溫控與預警">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">場景描述與營運痛點說明</label>
+                    <textarea id="modal-scenario-desc" required rows="2" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500" placeholder="例如：如何整合豬舍 IoT 溫濕度監測，並透過 AI 自動調控並通知現場飼養人員，防止熱應激？"></textarea>
+                </div>
+
+                <!-- Step 1: Choose Cloud Platform (中) -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">對應雲端中台/SI 整合方案 (中間層)</label>
+                    <select id="modal-scenario-cloud" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-nicegarden-500">
+                        <option value="aws">Amazon AWS 助力方案 (Greengrass & S3 數據湖)</option>
+                        <option value="si">緯謙 / 外部SI夥伴整合方案 (Cloud API Gateway)</option>
+                        <option value="azure">Microsoft Azure (Fabric & OpenAI)</option>
+                        <option value="gcp">Google Cloud (Vertex AI & BigQuery)</option>
+                    </select>
+                </div>
+
+                <!-- Step 2: Choose Supporting Sources (左) -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1.5">關聯：左側供應鏈數據源支撐 (複選)</label>
+                    <div id="scenario-sources-checkboxes" class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100 max-h-[140px] overflow-y-auto">
+                        <!-- JS dynamic load checkboxes of currentSources -->
+                    </div>
+                </div>
+
+                <!-- Step 3: Choose Target AI Agents (右) -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1.5">關聯：右側授權 AI Agent 代理任務 (複選)</label>
+                    <div id="scenario-agents-checkboxes" class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100 max-h-[140px] overflow-y-auto">
+                        <!-- JS dynamic load checkboxes of currentAgents -->
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-6">
+                    <button type="button" id="modal-scenario-delete-btn" onclick="deleteScenarioClick()" class="bg-red-50 hover:bg-red-100 text-red-600 text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                        刪除此場景
+                    </button>
+                    <div class="flex space-x-2">
+                        <button type="button" onclick="closeScenarioEditorModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                            取消
+                        </button>
+                        <button type="submit" class="bg-nicegarden-600 hover:bg-nicegarden-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition duration-150">
+                            儲存決策場景
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- JAVASCRIPT LOGIC & INTERACTION -->
+    <script>
+        // Preset Business Activities list for AI Agents
+        let activityOptions = ["生產", "銷售", "人資", "研發", "財務", "客服"];
+
+        // Default Dataset: Comprehensive, structured according to NiceGarden strategy docs.
+        const defaultSources = [
+            { id: "src-sap", name: "SAP B1 Core (ERP)", bu: "總部", type: "auto", status: "existing", desc: "全集團財務與進銷存核心，確保單一 facts 來源。" },
+            { id: "src-datastor", name: "DataStor 生產管理", bu: "動保", type: "auto", status: "existing", desc: "預拌精料與營養劑投料、配方精度及批次追溯。" },
+            { id: "src-porcitec", name: "PORCITEC 保飼佳", bu: "動保", type: "auto", status: "existing", desc: "契養牧場與自有母豬一貫場生產效率、生長曲線數據。" },
+            { id: "src-wms", name: "良作工場 WMS", bu: "良作", type: "auto", status: "existing", desc: "冷鏈、肉品倉儲與即時庫存控管系統。" },
+            { id: "src-pos", name: "品鮮璞食 POS", bu: "品鮮", type: "auto", status: "existing", desc: "文創文藝館與實體門市零售交易數據。" },
+            { id: "src-crm", name: "Vital CRM 客情平台", bu: "動保", type: "auto", status: "existing", desc: "目前於動保事業處做為客情紀錄的平台，非品鮮使用的 OMO 系統。" },
+            { id: "src-bpm", name: "BPM 流程簽核系統", bu: "總部", type: "auto", status: "existing", desc: "集團線上表單、簽核時效與行政流動記錄。" },
+            { id: "src-cyberbiz", name: "Cyberbiz 璞食電商", bu: "品鮮", type: "auto", status: "existing", desc: "線上商城營收、訂單週轉與轉化數據。" },
+            { id: "src-mes", name: "良作分切廠 MES", bu: "良作", type: "auto", status: "missing", desc: "分切得率 (Yield)、加工工時 (Labor Hours) 實時數據採集，成本控制分析的核心基礎。" },
+            { id: "src-logistics", name: "多溫層物流排程系統", bu: "良作", type: "manual", status: "missing", desc: "冷鏈配送配送路線、裝載率與車趟調度（人工作業，亟需自動化優化）。" },
+            { id: "src-traceability", name: "究好供應鏈追蹤系統", bu: "良作", type: "manual", status: "existing", desc: "目前半人工收集契養豬隻進場、屠宰至分切條碼數據。" },
+            { id: "src-compliance", name: "非追不可申報作業", bu: "總部", type: "manual", status: "existing", desc: "政府要求食品安全追溯申報，目前天天耗費大量人工進行重複 key-in。" },
+            { id: "src-price-monitor", name: "國際原料價格監控", bu: "動保", type: "manual", status: "missing", desc: "大豆粉、玉米大宗原料進口成本，目前散落於 Excel，缺乏自動通知。" }
+        ];
+
+        // Default Outcomes/Requirements Dataset
+        const defaultOutcomes = [
+            { id: "out-ioc", title: "IOC 智慧營運戰情室 (結構化)", badge: "即時回報", style: "green", desc: "透過 Power BI / QuickSight 呈現良作精準分切得率與動保配方庫存，Kevin 董事長與 BU 主管可免聽取重複匯報直接掌握 80% 營運狀態。" },
+            { id: "out-rag", title: "企業知識庫 KMS RAG (非結構化)", badge: "Choho Brain", style: "amber", desc: "彙整 M365 協作數據、SOP 與營養配方技術文件，訓練祥圃專屬大模型（Digital Twin），落實畜產與生產經營知識傳承。" }
+        ];
+
+        // Default AI Agents Dataset
+        const defaultAgents = [
+            { id: "agent-mes", name: "良作實時成本 MES 決策", desc: "打通 SAP 數據庫，精準即時分析分切廠實時成本與良率，免去層層報表匯報。", bu: "良作", activities: ["生產", "財務"], laborHoursSaved: 120, headcountSavings: 3, checked: false, isDefault: true },
+            { id: "agent-compliance", name: "非追不可食安自動申報 Agent", desc: "自動將品保溯源數據填報至政府平台，一鍵送審，降低人工重複填寫負擔。", bu: "總部", activities: ["生產", "客服"], laborHoursSaved: 80, headcountSavings: 2, checked: false, isDefault: true },
+            { id: "agent-logistics", name: "多溫層物流排程與回頭車 Agent", desc: "自動優化多溫層配送車趟與路徑，降本減碳，釋放調度排班管理量能。", bu: "良作", activities: ["生產", "銷售", "物流"], laborHoursSaved: 160, headcountSavings: 3, checked: false, isDefault: true },
+            { id: "agent-procure", name: "動保精料與進口採購決策 Agent", desc: "追蹤大宗原料價格與庫存週轉，自動促發採購及投料預警。", bu: "動保", activities: ["生產", "財務"], laborHoursSaved: 100, headcountSavings: 2, checked: false, isDefault: true }
+        ];
+
+        // Default Scenario presets
+        const defaultScenarios = [
+            {
+                id: "mes-cost",
+                title: "場景一：良作分切成本專案",
+                desc: "如何掌握分切工廠的實際生產成本，建立無人干預自動數據分析？",
+                sources: ["src-mes", "src-wms", "src-sap"],
+                cloud: "aws",
+                agents: ["agent-mes"]
+            },
+            {
+                id: "compliance-report",
+                title: "場景二：食安追溯「非追不可」申報",
+                desc: "品保每天花大把時間重複手動登錄政府申報系統，能否全自動？",
+                sources: ["src-traceability", "src-sap", "src-compliance"],
+                cloud: "azure",
+                agents: ["agent-compliance"]
+            },
+            {
+                id: "raw-materials",
+                title: "場景三：國際原料與精料採購預警",
+                desc: "大豆、玉米原料暴漲，如何自動與往來牧場與客情系統連結做出採購預備？",
+                sources: ["src-datastor", "src-porcitec", "src-price-monitor", "src-crm"],
+                cloud: "gcp",
+                agents: ["agent-procure"]
+            },
+            {
+                id: "omo-logistics",
+                title: "場景四：品鮮與冷鏈物流排程",
+                desc: "實體門市與電商整合後，多溫層配送車趟如何排程減碳並提高裝載？",
+                sources: ["src-pos", "src-cyberbiz", "src-logistics"],
+                cloud: "aws",
+                agents: ["agent-logistics"]
+            }
+        ];
+
+        // State Management
+        let currentSources = [];
+        let currentOutcomes = [];
+        let currentAgents = [];
+        let currentScenarios = [];
+        
+        let currentFilter = 'all';          // Left Data Source Filter
+        let currentOutcomeFilter = 'all';   // Right Outcomes Filter
+        let currentAgentFilter = 'all';     // Right AI Agents Filter
+        let currentCloud = 'aws';
+        
+        let activeScenario = null;
+        let preScenarioAgentStates = {};    // Remembers toggle states before scenario started
+
+        // Cloud specific details matching AWS Meeting notes vs Azure vs GCP vs WiAdvance
+        const cloudProviderData = {
+            aws: {
+                title: "亞馬遜 AWS 助力方案 (符合會議紀錄)",
+                list: [
+                    { title: "IoT Greengrass 邊緣運算", desc: "現場採集分切磅秤與 RFID 數據，保障數據主導權，不被單一硬體廠商鎖死。" },
+                    { title: "S3 究好數據湖 (Data Lake)", desc: "融合 SAP ERP、DataStor 與 M365 協作紀錄，建構集團跨部門唯一事實來源。" },
+                    { title: "Amazon Bedrock 大型模型", desc: "採用 Llama 3 / Claude 安全架構，無需程式碼即可快速訓練 Choho Brain 客製化專家 RAG。" },
+                    { title: "Amazon QuickSight 戰情室", desc: "提供董事長與決策層即時儀表板，將異常警示化，減少 BU 之間反覆對帳匯報。" },
+                    { title: "AWS 數位轉型共識工作坊", desc: "專為特助、工廠經理、採購及分切主管規劃的 Workshop，藉以排定 AI 應用場景 PoC 優先序，推動跨組織對齊。" }
+                ]
+            },
+            azure: {
+                title: "微軟 Azure 現代化辦公整合",
+                list: [
+                    { title: "Microsoft Fabric 數據湖", desc: "將 Data Lakehouse 與 Power BI 打通，高度整合 SAP ERP 流程。" },
+                    { title: "Azure OpenAI 企業安全助理", desc: "深度整合 Teams / SharePoint 非結構化協作，建置內部對答客服機器人。" },
+                    { title: "Power Automate RPA 機器人", desc: "一鍵自動提取溯源資料，搬運填報至『非追不可』等政府食安申報網。" },
+                    { title: "M365 Copilot 辦公賦能", desc: "基層員工日常郵件、會議摘要工具，消滅每日枯燥行政文書時間。" }
+                ]
+            },
+            gcp: {
+                title: "谷歌 GCP 智慧分析與預測",
+                list: [
+                    { title: "Vertex AI 預測演算法", desc: "基於 PORCITEC 保飼佳歷史生長曲線，自動分析 FCR 換肉率並預測屠宰品質。" },
+                    { title: "BigQuery 高效分析", desc: "跨域分析動保 Vital CRM、POS 與 Cyberbiz 璞食電商之 OMO 會員行為軌跡。" },
+                    { title: "Enterprise Search 知識搜尋", desc: "將飼料配方、獸醫報告及品保 SOP 打包為極速智能搜尋助理。" }
+                ]
+            },
+            si: {
+                title: "緯謙 / 外部 SI 夥伴整合架構",
+                list: [
+                    { title: "緯謙 Cloud API Gateway", desc: "整合並打包本地端 SAP B1、WMS 數據，提供安全微服務與數據交換端點。" },
+                    { title: "雲地 Hybrid 整合技術", desc: "對接分切廠地端工業磅秤感測器，確保工廠斷網時生產依然不中斷。" },
+                    { title: "ISO 27001 資安多租戶隔離", desc: "高安全規格多租戶防護，確保契養夥伴與同業敢將重要畜牧數據接上究好雲。" },
+                    { title: "業務流程重塑 (BPR)", desc: "智慧營運中心 IOC 指導編制物料與組織主數據(MDM)，奠定系統自動化基本功。" }
+                ]
+            }
+        };
+
+        // Initialize App
+        window.onload = function() {
+            // Load state from local storage or set default
+            const savedSources = localStorage.getItem('nicegarden_sources');
+            if (savedSources) {
+                currentSources = JSON.parse(savedSources);
+            } else {
+                currentSources = JSON.parse(JSON.stringify(defaultSources));
+            }
+
+            const savedOutcomes = localStorage.getItem('nicegarden_outcomes');
+            if (savedOutcomes) {
+                currentOutcomes = JSON.parse(savedOutcomes);
+            } else {
+                currentOutcomes = JSON.parse(JSON.stringify(defaultOutcomes));
+            }
+
+            const savedAgents = localStorage.getItem('nicegarden_agents');
+            if (savedAgents) {
+                currentAgents = JSON.parse(savedAgents);
+            } else {
+                currentAgents = JSON.parse(JSON.stringify(defaultAgents));
+            }
+
+            const savedScenarios = localStorage.getItem('nicegarden_scenarios');
+            if (savedScenarios) {
+                currentScenarios = JSON.parse(savedScenarios);
+            } else {
+                currentScenarios = JSON.parse(JSON.stringify(defaultScenarios));
+            }
+
+            // Extract custom activity options from saved agents to keep the presets complete
+            currentAgents.forEach(a => {
+                if (a.activities && Array.isArray(a.activities)) {
+                    a.activities.forEach(act => {
+                        if (!activityOptions.includes(act)) {
+                            activityOptions.push(act);
+                        }
+                    });
+                }
+            });
+
+            renderSources();
+            renderOutcomes();
+            renderAgents();
+            renderScenariosList();
+            selectCloud('aws');
+            updateSpanOfControl();
+            showToast("✨ 祥圃智慧營運畫布已備妥，歡迎與董事長 Kevin 對齊數位共識！");
+        };
+
+        // Render Data Source cards dynamically
+        function renderSources() {
+            const container = document.getElementById('source-list-container');
+            container.innerHTML = '';
+
+            const filtered = currentSources.filter(src => {
+                if (currentFilter === 'all') return true;
+                if (currentFilter === 'existing') return src.status === 'existing';
+                if (currentFilter === 'missing') return src.status === 'missing';
+                if (currentFilter === 'auto') return src.type === 'auto';
+                if (currentFilter === 'manual') return src.type === 'manual';
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 border border-dashed border-nicegarden-200 rounded-xl">
+                        <p class="text-nicegarden-400 text-xs font-semibold">此篩選條件下無系統或資料類型</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(src => {
+                const isHighlighted = isNodeInActiveScenario(src.id);
+                const highlightClass = isHighlighted 
+                    ? 'active-scenario-highlight border-nicegarden-accent bg-nicegarden-50/70 shadow-md ring-1 ring-nicegarden-accent/30' 
+                    : 'border-nicegarden-100/70 bg-nicegarden-50/30 hover:bg-nicegarden-50/80 hover:border-nicegarden-300';
+
+                // Determine badges
+                const statusBadge = src.status === 'existing' 
+                    ? `<span class="bg-nicegarden-100 text-nicegarden-800 text-[10px] font-extrabold px-1.5 py-0.5 rounded">已建置</span>`
+                    : `<span class="bg-orange-50 text-nicegarden-accent text-[10px] font-extrabold px-1.5 py-0.5 rounded border border-orange-100">待增補</span>`;
+                
+                const typeBadge = src.type === 'auto'
+                    ? `<span class="bg-blue-50 text-blue-800 text-[10px] font-extrabold px-1.5 py-0.5 rounded border border-blue-100">SaaS自動</span>`
+                    : `<span class="bg-amber-50 text-amber-800 text-[10px] font-extrabold px-1.5 py-0.5 rounded border border-amber-100">手工作業</span>`;
+
+                const buBadge = `<span class="bg-slate-200/80 text-slate-700 text-[10px] font-bold px-1.5 py-0.5 rounded">${src.bu}</span>`;
+
+                const cardHtml = `
+                    <div id="card-${src.id}" onclick="openEditSourceModal('${src.id}')" class="p-3 border rounded-xl cursor-pointer transition duration-150 relative ${highlightClass}">
+                        <div class="flex items-start justify-between gap-2 mb-1.5">
+                            <h4 class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                                ${src.name}
+                            </h4>
+                            <div class="flex flex-wrap gap-1 justify-end">
+                                ${buBadge}
+                                ${typeBadge}
+                                ${statusBadge}
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500 line-clamp-2">${src.desc || '無說明'}</p>
+                        ${isHighlighted ? `<div class="absolute -right-1 -top-1 w-3 h-3 bg-nicegarden-accent rounded-full animate-ping"></div>` : ''}
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        // Render Dynamic Outcomes on the Right
+        function renderOutcomes() {
+            const container = document.getElementById('outcome-list-container');
+            container.innerHTML = '';
+
+            const filteredOutcomes = currentOutcomes.filter(out => {
+                if (currentOutcomeFilter === 'all') return true;
+                if (currentOutcomeFilter === 'green') return out.style === 'green' || !out.style;
+                if (currentOutcomeFilter === 'amber') return out.style === 'amber';
+                if (currentOutcomeFilter === 'custom') return out.style === 'blue' || out.style === 'slate';
+                return true;
+            });
+
+            if (filteredOutcomes.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-6 border-2 border-dashed border-nicegarden-100 rounded-xl">
+                        <p class="text-slate-400 text-xs font-semibold">此篩選類別下目前無對應需求目標。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredOutcomes.forEach(out => {
+                let styleClass = "bg-nicegarden-50/50 border-nicegarden-200 hover:border-nicegarden-400";
+                let textClass = "text-nicegarden-800";
+                let badgeClass = "bg-nicegarden-100 text-nicegarden-700";
+
+                if (out.style === 'amber') {
+                    styleClass = "bg-amber-50/50 border-amber-200 hover:border-amber-400";
+                    textClass = "text-amber-800";
+                    badgeClass = "bg-amber-100 text-amber-700";
+                } else if (out.style === 'blue') {
+                    styleClass = "bg-blue-50/50 border-blue-200 hover:border-blue-400";
+                    textClass = "text-blue-800";
+                    badgeClass = "bg-blue-100 text-blue-700";
+                } else if (out.style === 'slate') {
+                    styleClass = "bg-slate-50 border-slate-200 hover:border-slate-400";
+                    textClass = "text-slate-800";
+                    badgeClass = "bg-slate-200 text-slate-600";
+                }
+
+                const cardHtml = `
+                    <div onclick="openEditOutcomeModal('${out.id}')" class="rounded-xl p-3 border cursor-pointer hover:shadow-sm transition ${styleClass}">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <h4 class="text-xs font-bold ${textClass}">${out.title}</h4>
+                            <span class="text-[9px] ${badgeClass} px-1.5 py-0.5 rounded font-extrabold uppercase">${out.badge}</span>
+                        </div>
+                        <p class="text-xs text-slate-600 line-clamp-3">${out.desc || '無詳細說明。'}</p>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        // Render AI Agent dynamic list
+        function renderAgents() {
+            const container = document.getElementById('agent-list-container');
+            container.innerHTML = '';
+
+            const filteredAgents = currentAgents.filter(agent => {
+                if (currentAgentFilter === 'all') return true;
+                return agent.bu === currentAgentFilter;
+            });
+
+            if (filteredAgents.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-6 border border-dashed border-nicegarden-100 rounded-xl">
+                        <p class="text-slate-400 text-xs font-semibold">此事業處 (BU) 下無自訂 AI Agent 代理任務。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredAgents.forEach(agent => {
+                const isChecked = agent.checked ? 'checked' : '';
+
+                // Build activities rendering
+                const actsArray = agent.activities || [];
+                const activitiesBadges = actsArray.map(act => 
+                    `<span class="bg-nicegarden-100 text-nicegarden-700 text-[9px] font-semibold px-1 py-0.2 rounded">${act}</span>`
+                ).join(" ");
+
+                const editBtn = `
+                    <button onclick="openEditAgentModal('${agent.id}')" class="text-slate-400 hover:text-nicegarden-600 p-1" title="編輯此 AI Agent 任務">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                    </button>
+                `;
+
+                const cardHtml = `
+                    <div id="agent-card-${agent.id}" class="p-3 border border-slate-100 rounded-xl bg-slate-50 hover:bg-slate-100/50 transition">
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="space-y-1">
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    <span class="text-xs font-bold text-slate-800">${agent.name}</span>
+                                    <span class="bg-slate-200 text-slate-700 text-[9px] font-bold px-1.5 py-0.2 rounded">${agent.bu}</span>
+                                </div>
+                                <p class="text-[10px] text-slate-500">${agent.desc || '無描述'}</p>
+                                <div class="flex flex-wrap items-center gap-1.5 pt-1.5">
+                                    <span class="text-[9px] text-slate-400 font-bold uppercase">營運活動:</span>
+                                    ${activitiesBadges || '<span class="text-[9px] text-slate-400">未指定</span>'}
+                                </div>
+                                <div class="flex items-center gap-3 pt-1 text-[10px] text-nicegarden-700 font-bold">
+                                    <span>👤 收斂直屬主管: -${agent.headcountSavings || 0} 人</span>
+                                    <span class="text-nicegarden-accent">⏱️ 省工: ${agent.laborHoursSaved || 0} 小時/月</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-1 flex-shrink-0">
+                                ${editBtn}
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="agent-${agent.id}" onchange="toggleAgentState('${agent.id}')" ${isChecked} class="sr-only peer">
+                                    <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-nicegarden-600"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        // Render Scenario Cards Grid inside the Scenario Selector Modal (Dynamic!)
+        function renderScenariosList() {
+            const grid = document.getElementById('scenario-grid-container');
+            grid.innerHTML = '';
+
+            currentScenarios.forEach(scen => {
+                // Count connected elements to show inside card for professional EA view
+                const leftCount = scen.sources?.length || 0;
+                const rightCount = scen.agents?.length || 0;
+                const cloudName = scen.cloud ? scen.cloud.toUpperCase() : 'AWS';
+
+                const cardHtml = `
+                    <div class="p-4 border border-slate-200 bg-slate-50 hover:bg-nicegarden-50/50 hover:border-nicegarden-300 rounded-xl transition flex flex-col justify-between min-h-36 shadow-sm relative group">
+                        <!-- Top actions -->
+                        <div class="absolute right-3 top-3 flex space-x-1.5 opacity-60 group-hover:opacity-100 transition">
+                            <button onclick="event.stopPropagation(); openEditScenarioModal('${scen.id}')" class="text-slate-500 hover:text-nicegarden-600 p-1 bg-white rounded border border-slate-200" title="編輯此場景配對">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                            </button>
+                        </div>
+
+                        <div onclick="runScenario('${scen.id}')" class="cursor-pointer flex-grow space-y-1.5 pr-8">
+                            <span class="text-xs font-black text-nicegarden-800">${scen.title}</span>
+                            <p class="text-[11px] text-slate-500 leading-relaxed">${scen.desc}</p>
+                        </div>
+
+                        <!-- Technical Mapping Indicator -->
+                        <div onclick="runScenario('${scen.id}')" class="cursor-pointer border-t border-slate-200/60 pt-2.5 mt-3 flex items-center justify-between text-[9px] text-slate-400 font-bold uppercase tracking-wider">
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-nicegarden-100 text-nicegarden-800 px-1.5 py-0.5 rounded">左: ${leftCount} 數據源</span>
+                                <span class="bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded">中: ${cloudName}</span>
+                                <span class="bg-orange-100 text-nicegarden-accent px-1.5 py-0.5 rounded">右: ${rightCount} Agent</span>
+                            </div>
+                            <span class="text-nicegarden-600 font-extrabold flex items-center gap-1 group-hover:text-nicegarden-700 transition">
+                                啟動演練 ➔
+                            </span>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHtml;
+            });
+        }
+
+        // Left data source filter setting
+        function setSourceFilter(filter) {
+            currentFilter = filter;
+            ['all', 'existing', 'missing', 'auto', 'manual'].forEach(f => {
+                const btn = document.getElementById(`filter-${f}`);
+                if (f === filter) {
+                    btn.className = "px-3 py-1 rounded-lg text-xs font-bold bg-white text-nicegarden-800 shadow transition";
+                } else {
+                    btn.className = "px-3 py-1 rounded-lg text-xs font-bold bg-nicegarden-700 text-nicegarden-200 hover:bg-nicegarden-600 transition";
+                }
+            });
+            renderSources();
+        }
+
+        // Right Outcomes filter setting
+        function setOutcomeFilter(filter) {
+            currentOutcomeFilter = filter;
+            ['all', 'green', 'amber', 'custom'].forEach(f => {
+                const btn = document.getElementById(`out-filter-${f}`);
+                if (f === filter) {
+                    btn.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-nicegarden-500 text-white transition shadow-sm";
+                } else {
+                    btn.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition";
+                }
+            });
+            renderOutcomes();
+        }
+
+        // Right Agent filter setting
+        function setAgentFilter(filter) {
+            currentAgentFilter = filter;
+            ['all', '動保', '良作', '品鮮', '總部'].forEach(f => {
+                const btn = document.getElementById(`agent-filter-${f}`);
+                if (f === filter) {
+                    btn.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-nicegarden-500 text-white transition shadow-sm";
+                } else {
+                    btn.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition";
+                }
+            });
+            renderAgents();
+        }
+
+        // Select Cloud Provider
+        function selectCloud(provider) {
+            currentCloud = provider;
+            ['aws', 'azure', 'gcp', 'si'].forEach(p => {
+                const btn = document.getElementById(`cloud-${p}`);
+                if (p === provider) {
+                    btn.className = "p-3 border-2 border-nicegarden-500 bg-nicegarden-50 rounded-xl text-left transition duration-200 flex flex-col justify-between h-20 active-glow shadow-sm";
+                } else {
+                    btn.className = "p-3 border border-slate-200 bg-slate-50 hover:bg-slate-100 rounded-xl text-left transition duration-200 flex flex-col justify-between h-20";
+                }
+            });
+
+            const data = cloudProviderData[provider];
+            const detailsContainer = document.getElementById('cloud-details-container');
+            
+            let listHtml = `
+                <h5 class="text-xs font-black text-nicegarden-800 tracking-wider flex items-center gap-1">
+                    <span class="w-1.5 h-3 bg-nicegarden-accent rounded-full inline-block"></span>
+                    ${data.title}
+                </h5>
+                <ul class="space-y-2 mt-2">
+            `;
+
+            data.list.forEach(item => {
+                listHtml += `
+                    <li class="text-xs text-slate-600 flex items-start gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-nicegarden-500 mt-1.5 flex-shrink-0"></span>
+                        <div>
+                            <strong class="text-nicegarden-800 font-bold">${item.title}</strong>: ${item.desc}
+                        </div>
+                    </li>
+                `;
+            });
+            listHtml += '</ul>';
+            detailsContainer.innerHTML = listHtml;
+            
+            showToast(`⚙️ 已切換中台中樞：${data.title}`);
+        }
+
+        // Toggle Right AI Agent Switch state & recalculate span
+        function toggleAgentState(agentId) {
+            const agent = currentAgents.find(a => a.id === agentId);
+            if (agent) {
+                const checkbox = document.getElementById(`agent-${agentId}`);
+                agent.checked = checkbox.checked;
+                
+                localStorage.setItem('nicegarden_agents', JSON.stringify(currentAgents));
+                updateSpanOfControl();
+                
+                if (agent.checked) {
+                    let missingDeps = [];
+                    if (agentId === 'agent-mes' && isSourceMissing('src-mes')) missingDeps.push("良作分切廠 MES");
+                    if (agentId === 'agent-compliance' && isSourceMissing('src-compliance')) missingDeps.push("非追不可申報作業");
+                    if (agentId === 'agent-logistics' && isSourceMissing('src-logistics')) missingDeps.push("多溫層物流排程系統");
+                    if (agentId === 'agent-procure' && isSourceMissing('src-price-monitor')) missingDeps.push("國際原料價格監控");
+
+                    if (missingDeps.length > 0) {
+                        showToast(`⚠️ 警示：已授權 ${agent.name}，但左側缺少關鍵數據源 [${missingDeps.join(', ')}]，此專案仍無法完全落地！`);
+                    } else {
+                        showToast(`✅ 已開啟 AI Agent 代理任務：${agent.name}！累計效益已計入。`);
+                    }
+                } else {
+                    showToast(`ℹ️ 已收回：${agent.name} 的代理授權。`);
+                }
+            }
+        }
+
+        // Span of Control Calculator (Calculates Kevin's Span of Control dynamically & Labor Hours!)
+        function updateSpanOfControl() {
+            let baseSpan = 20; // Starts from 20 direct managers
+            let totalHours = 0;
+            
+            // Each checked agent reduces direct workload based on headcount savings value and accumulates saved hours
+            currentAgents.forEach(agent => {
+                if (agent.checked) {
+                    baseSpan -= (Number(agent.headcountSavings) || 0);
+                    totalHours += (Number(agent.laborHoursSaved) || 0);
+                }
+            });
+
+            // Solving "missing" systems also reduces span of control
+            const resolvedCount = currentSources.filter(s => s.status === 'existing').length;
+            const originalExistingCount = defaultSources.filter(s => s.status === 'existing').length;
+            const newlyResolved = resolvedCount - originalExistingCount;
+            if (newlyResolved > 0) {
+                baseSpan -= newlyResolved;
+            }
+
+            // Bound span of control between 5 and 20
+            const finalSpan = Math.max(5, Math.min(20, baseSpan));
+            
+            const spanText = document.getElementById('span-of-control-val');
+            if (spanText) spanText.textContent = finalSpan;
+
+            const hoursText = document.getElementById('accumulated-hours-val');
+            if (hoursText) hoursText.textContent = totalHours;
+
+            // Color indicator matching natural palette
+            if (spanText) {
+                if (finalSpan <= 7) {
+                    spanText.className = "text-2xl font-black text-nicegarden-500 transition-all duration-500 scale-110";
+                } else if (finalSpan <= 12) {
+                    spanText.className = "text-2xl font-black text-amber-600 transition-all duration-500";
+                } else {
+                    spanText.className = "text-2xl font-black text-slate-600 transition-all duration-500";
+                }
+            }
+
+            // Workload Optimization Rate (With Safe Guard Check!)
+            const rate = Math.round(((20 - finalSpan) / 15) * 100);
+            const optRateEl = document.getElementById('span-optimization-rate');
+            if (optRateEl) {
+                optRateEl.textContent = `${Math.max(0, rate)}%`;
+            }
+        }
+
+        // Scenario Simulator Logic (Loads dynamically configured Left-Middle-Right arrays and runs mapping!)
+        function runScenario(scenarioId) {
+            const scen = currentScenarios.find(s => s.id === scenarioId);
+            if (!scen) return;
+
+            activeScenario = scenarioId;
+            closeScenarioModal();
+            renderSources();
+
+            // Record previous agent check states to restore them later
+            preScenarioAgentStates = {};
+            currentAgents.forEach(a => {
+                preScenarioAgentStates[a.id] = a.checked;
+            });
+
+            // Apply Scenario Platform (中)
+            if (scen.cloud) {
+                selectCloud(scen.cloud);
+            }
+
+            // Apply Scenario Agents (右) - Turn all specified agents in this scenario ON, turn others OFF temporarily
+            currentAgents.forEach(a => {
+                const targetState = scen.agents?.includes(a.id) || false;
+                setAgentCheckedState(a.id, targetState);
+            });
+
+            updateSpanOfControl();
+
+            // Display sticky floating control bar for simulation control
+            const controlBar = document.getElementById('scenario-control-bar');
+            document.getElementById('scenario-bar-title').textContent = scen.title;
+            document.getElementById('scenario-bar-desc').textContent = scen.desc;
+            controlBar.classList.remove('hidden');
+            controlBar.classList.add('flex');
+            
+            showToast(`🎬 開始演示情境：${scen.title}`);
+        }
+
+        // Helper to set checked status of checkbox elements
+        function setAgentCheckedState(agentId, checked) {
+            const agent = currentAgents.find(a => a.id === agentId);
+            if (agent) {
+                agent.checked = checked;
+                const cb = document.getElementById(`agent-${agentId}`);
+                if (cb) cb.checked = checked;
+            }
+        }
+
+        // Closes scenario flow, restores pre-scenario states
+        function stopScenario() {
+            // Restore original Agent toggle configurations
+            currentAgents.forEach(a => {
+                if (preScenarioAgentStates[a.id] !== undefined) {
+                    a.checked = preScenarioAgentStates[a.id];
+                    const cb = document.getElementById(`agent-${a.id}`);
+                    if (cb) cb.checked = preScenarioAgentStates[a.id];
+                }
+            });
+
+            activeScenario = null;
+            
+            // Hide control bar
+            const controlBar = document.getElementById('scenario-control-bar');
+            controlBar.classList.add('hidden');
+            controlBar.classList.remove('flex');
+            
+            renderSources();
+            updateSpanOfControl();
+            showToast("ℹ️ 演示結束。系統配置、節點與 Agent 狀態已恢復原狀。");
+        }
+
+        // RESET ONLY SIMULATION STATE - Keeps all user modifications completely intact
+        function resetSimulationOnly() {
+            stopScenario();
+            // Just restore all current checkboxes to unchecked to let user start manually choosing
+            currentAgents.forEach(a => {
+                a.checked = false;
+                const cb = document.getElementById(`agent-${a.id}`);
+                if (cb) cb.checked = false;
+            });
+            selectCloud('aws');
+            renderSources();
+            updateSpanOfControl();
+            showToast("🔄 模擬亮點已重置。您跟高層與各 BU 主管自訂與修改的數據/Agent 成果完全被保留！");
+        }
+
+        function isNodeInActiveScenario(nodeId) {
+            if (!activeScenario) return false;
+            const scen = currentScenarios.find(s => s.id === activeScenario);
+            return scen ? scen.sources?.includes(nodeId) : false;
+        }
+
+        // --- Left Source Node Modals ---
+        function openAddSourceModal() {
+            document.getElementById('modal-title').textContent = "新增數據源節點";
+            document.getElementById('modal-source-id').value = "";
+            document.getElementById('source-form').reset();
+            document.getElementById('modal-delete-btn').style.display = "none";
+            document.getElementById('source-modal').style.display = "flex";
+        }
+
+        function openEditSourceModal(id) {
+            const src = currentSources.find(s => s.id === id);
+            if (!src) return;
+
+            document.getElementById('modal-title').textContent = `編輯數據：${src.name}`;
+            document.getElementById('modal-source-id').value = src.id;
+            document.getElementById('modal-source-name').value = src.name;
+            document.getElementById('modal-source-bu').value = src.bu;
+            document.getElementById('modal-source-type').value = src.type;
+            document.getElementById('modal-source-status').value = src.status;
+            document.getElementById('modal-source-desc').value = src.desc || '';
+            document.getElementById('modal-delete-btn').style.display = "block";
+            document.getElementById('source-modal').style.display = "flex";
+        }
+
+        function closeSourceModal() {
+            document.getElementById('source-modal').style.display = "none";
+        }
+
+        function saveSource(event) {
+            event.preventDefault();
+            const id = document.getElementById('modal-source-id').value;
+            const name = document.getElementById('modal-source-name').value;
+            const bu = document.getElementById('modal-source-bu').value;
+            const type = document.getElementById('modal-source-type').value;
+            const status = document.getElementById('modal-source-status').value;
+            const desc = document.getElementById('modal-source-desc').value;
+
+            if (id) {
+                const index = currentSources.findIndex(s => s.id === id);
+                if (index !== -1) {
+                    currentSources[index] = { id, name, bu, type, status, desc };
+                    showToast(`📝 已更新數據源：${name}`);
+                }
+            } else {
+                const newId = `src-custom-${Date.now()}`;
+                currentSources.push({ id: newId, name, bu, type, status, desc });
+                showToast(`➕ 已新增自訂數據源：${name}`);
+            }
+
+            localStorage.setItem('nicegarden_sources', JSON.stringify(currentSources));
+            closeSourceModal();
+            renderSources();
+            updateSpanOfControl();
+        }
+
+        function deleteSourceClick() {
+            const id = document.getElementById('modal-source-id').value;
+            if (!id) return;
+
+            const index = currentSources.findIndex(s => s.id === id);
+            if (index !== -1) {
+                const name = currentSources[index].name;
+                currentSources.splice(index, 1);
+                showToast(`🗑️ 已刪除數據源：${name}`);
+            }
+
+            localStorage.setItem('nicegarden_sources', JSON.stringify(currentSources));
+            closeSourceModal();
+            renderSources();
+            updateSpanOfControl();
+        }
+
+        // --- Right Outcomes/Requirements Modals ---
+        function openAddOutcomeModal() {
+            document.getElementById('outcome-modal-title').textContent = "新增決策成果需求";
+            document.getElementById('modal-outcome-id').value = "";
+            document.getElementById('outcome-form').reset();
+            document.getElementById('modal-outcome-delete-btn').style.display = "none";
+            document.getElementById('outcome-modal').style.display = "flex";
+        }
+
+        function openEditOutcomeModal(id) {
+            const out = currentOutcomes.find(o => o.id === id);
+            if (!out) return;
+
+            document.getElementById('outcome-modal-title').textContent = `編輯需求：${out.title}`;
+            document.getElementById('modal-outcome-id').value = out.id;
+            document.getElementById('modal-outcome-name').value = out.title;
+            document.getElementById('modal-outcome-badge').value = out.badge;
+            document.getElementById('modal-outcome-style').value = out.style || 'green';
+            document.getElementById('modal-outcome-desc').value = out.desc || '';
+            document.getElementById('modal-outcome-delete-btn').style.display = "block";
+            document.getElementById('outcome-modal').style.display = "flex";
+        }
+
+        function closeOutcomeModal() {
+            document.getElementById('outcome-modal').style.display = "none";
+        }
+
+        function saveOutcome(event) {
+            event.preventDefault();
+            const id = document.getElementById('modal-outcome-id').value;
+            const title = document.getElementById('modal-outcome-name').value;
+            const badge = document.getElementById('modal-outcome-badge').value;
+            const style = document.getElementById('modal-outcome-style').value;
+            const desc = document.getElementById('modal-outcome-desc').value;
+
+            if (id) {
+                const index = currentOutcomes.findIndex(o => o.id === id);
+                if (index !== -1) {
+                    currentOutcomes[index] = { id, title, badge, style, desc };
+                    showToast(`📝 已更新決策需求：${title}`);
+                }
+            } else {
+                const newId = `out-custom-${Date.now()}`;
+                currentOutcomes.push({ id: newId, title, badge, style, desc });
+                showToast(`➕ 已新增自訂需求：${title}`);
+            }
+
+            localStorage.setItem('nicegarden_outcomes', JSON.stringify(currentOutcomes));
+            closeOutcomeModal();
+            renderOutcomes();
+            updateSpanOfControl();
+        }
+
+        function deleteOutcomeClick() {
+            const id = document.getElementById('modal-outcome-id').value;
+            if (!id) return;
+
+            const index = currentOutcomes.findIndex(o => o.id === id);
+            if (index !== -1) {
+                const title = currentOutcomes[index].title;
+                currentOutcomes.splice(index, 1);
+                showToast(`🗑️ 已刪除決策需求：${title}`);
+            }
+
+            localStorage.setItem('nicegarden_outcomes', JSON.stringify(currentOutcomes));
+            closeOutcomeModal();
+            renderOutcomes();
+            updateSpanOfControl();
+        }
+
+        // --- Right Dynamic AI Agent Modals ---
+        function renderActivityCheckboxes(selectedActivities = []) {
+            const container = document.getElementById('activity-checkbox-container');
+            container.innerHTML = '';
+            
+            activityOptions.forEach((act, index) => {
+                const isChecked = selectedActivities.includes(act) ? 'checked' : '';
+                container.innerHTML += `
+                    <label class="flex items-center space-x-1.5 bg-white px-2.5 py-1 rounded border border-slate-200 text-xs text-slate-700 cursor-pointer hover:bg-slate-50">
+                        <input type="checkbox" name="agent-activities" value="${act}" ${isChecked} class="rounded text-nicegarden-600 focus:ring-nicegarden-500">
+                        <span>${act}</span>
+                    </label>
+                `;
+            });
+        }
+
+        function addNewActivityOption() {
+            const input = document.getElementById('modal-custom-activity-input');
+            const customValue = input.value.trim();
+            if (!customValue) return;
+
+            if (!activityOptions.includes(customValue)) {
+                activityOptions.push(customValue);
+                // Get currently selected activities from DOM to preserve them during re-render
+                const checkedBoxes = document.querySelectorAll('input[name="agent-activities"]:checked');
+                const currentlyChecked = Array.from(checkedBoxes).map(cb => cb.value);
+                currentlyChecked.push(customValue); // Auto-check the newly added custom activity
+
+                renderActivityCheckboxes(currentlyChecked);
+                input.value = '';
+                showToast(`💡 已新增營運活動選項：${customValue}`);
+            } else {
+                showToast(`ℹ️ 營運活動「${customValue}」選項已存在。`);
+            }
+        }
+
+        function openAddAgentModal() {
+            document.getElementById('agent-modal-title').textContent = "新增 AI Agent 代理任務";
+            document.getElementById('modal-agent-id').value = "";
+            document.getElementById('agent-form').reset();
+            document.getElementById('modal-agent-delete-btn').style.display = "none";
+            
+            // Render activities with empty checked list
+            renderActivityCheckboxes([]);
+            document.getElementById('agent-modal').style.display = "flex";
+        }
+
+        function openEditAgentModal(id) {
+            const agent = currentAgents.find(a => a.id === id);
+            if (!agent) return;
+
+            document.getElementById('agent-modal-title').textContent = `編輯 Agent 任務：${agent.name}`;
+            document.getElementById('modal-agent-id').value = agent.id;
+            document.getElementById('modal-agent-name').value = agent.name;
+            document.getElementById('modal-agent-desc').value = agent.desc || '';
+            document.getElementById('modal-agent-bu').value = agent.bu || '動保';
+            document.getElementById('modal-agent-savings').value = agent.headcountSavings || '0';
+            document.getElementById('modal-agent-hours').value = agent.laborHoursSaved || '0';
+            document.getElementById('modal-agent-delete-btn').style.display = "block";
+            
+            // Load and check this agent's configured activities
+            const selectedActivities = agent.activities || [];
+            // Ensure any custom activity that exists in this agent is in our option list
+            selectedActivities.forEach(act => {
+                if (!activityOptions.includes(act)) {
+                    activityOptions.push(act);
+                }
+            });
+
+            renderActivityCheckboxes(selectedActivities);
+            document.getElementById('agent-modal').style.display = "flex";
+        }
+
+        // Close Agent Modal
+        function closeAgentModal() {
+            document.getElementById('agent-modal').style.display = "none";
+        }
+
+        // Save Agent
+        function saveAgent(event) {
+            event.preventDefault();
+            const id = document.getElementById('modal-agent-id').value;
+            const name = document.getElementById('modal-agent-name').value;
+            const desc = document.getElementById('modal-agent-desc').value;
+            const bu = document.getElementById('modal-agent-bu').value;
+            const headcountSavings = Number(document.getElementById('modal-agent-savings').value) || 0;
+            const laborHoursSaved = Number(document.getElementById('modal-agent-hours').value) || 0;
+
+            // Get selected activities from checkboxes
+            const checkedBoxes = document.querySelectorAll('input[name="agent-activities"]:checked');
+            const activities = Array.from(checkedBoxes).map(cb => cb.value);
+
+            if (id) {
+                const index = currentAgents.findIndex(a => a.id === id);
+                if (index !== -1) {
+                    currentAgents[index].name = name;
+                    currentAgents[index].desc = desc;
+                    currentAgents[index].bu = bu;
+                    currentAgents[index].headcountSavings = headcountSavings;
+                    currentAgents[index].laborHoursSaved = laborHoursSaved;
+                    currentAgents[index].activities = activities;
+                    showToast(`📝 已更新 AI Agent：${name}`);
+                }
+            } else {
+                const newId = `agent-custom-${Date.now()}`;
+                currentAgents.push({
+                    id: newId,
+                    name: name,
+                    desc: desc,
+                    bu: bu,
+                    headcountSavings: headcountSavings,
+                    laborHoursSaved: laborHoursSaved,
+                    activities: activities,
+                    checked: false,
+                    isDefault: false
+                });
+                showToast(`➕ 已新增 AI Agent：${name}`);
+            }
+
+            localStorage.setItem('nicegarden_agents', JSON.stringify(currentAgents));
+            closeAgentModal();
+            renderAgents();
+            updateSpanOfControl();
+        }
+
+        // Delete Agent
+        function deleteAgentClick() {
+            const id = document.getElementById('modal-agent-id').value;
+            if (!id) return;
+
+            const index = currentAgents.findIndex(a => a.id === id);
+            if (index !== -1) {
+                const name = currentAgents[index].name;
+                currentAgents.splice(index, 1);
+                showToast(`🗑️ 已刪除 AI Agent：${name}`);
+            }
+
+            localStorage.setItem('nicegarden_agents', JSON.stringify(currentAgents));
+            closeAgentModal();
+            renderAgents();
+            updateSpanOfControl();
+        }
+
+        // ---情境模擬器決策場景配置與管理方法 (NEW ADVANCED SCENARIO BUILDER!) ---
+        function openScenarioModal() {
+            renderScenariosList();
+            document.getElementById('scenario-modal').style.display = "flex";
+        }
+
+        function closeScenarioModal() {
+            document.getElementById('scenario-modal').style.display = "none";
+        }
+
+        function closeScenarioEditorModal() {
+            document.getElementById('scenario-editor-modal').style.display = "none";
+        }
+
+        // Populates checkboxes dynamically inside scenario editor to leverage custom sources & agents
+        function populateScenarioEditorCheckboxes(selectedSources = [], selectedAgents = []) {
+            // 1. Load Sources checkboxes (Left)
+            const sourcesContainer = document.getElementById('scenario-sources-checkboxes');
+            sourcesContainer.innerHTML = '';
+            currentSources.forEach(src => {
+                const isChecked = selectedSources.includes(src.id) ? 'checked' : '';
+                sourcesContainer.innerHTML += `
+                    <label class="flex items-start space-x-2 bg-white px-2.5 py-1.5 rounded border border-slate-200 text-xs text-slate-700 cursor-pointer hover:bg-slate-50">
+                        <input type="checkbox" name="scenario-sources" value="${src.id}" ${isChecked} class="mt-0.5 rounded text-nicegarden-600 focus:ring-nicegarden-500">
+                        <div>
+                            <span class="font-bold">${src.name}</span>
+                            <span class="text-[9px] text-slate-400 block">${src.bu}</span>
+                        </div>
+                    </label>
+                `;
+            });
+
+            // 2. Load Agents checkboxes (Right)
+            const agentsContainer = document.getElementById('scenario-agents-checkboxes');
+            agentsContainer.innerHTML = '';
+            currentAgents.forEach(agent => {
+                const isChecked = selectedAgents.includes(agent.id) ? 'checked' : '';
+                agentsContainer.innerHTML += `
+                    <label class="flex items-start space-x-2 bg-white px-2.5 py-1.5 rounded border border-slate-200 text-xs text-slate-700 cursor-pointer hover:bg-slate-50">
+                        <input type="checkbox" name="scenario-agents" value="${agent.id}" ${isChecked} class="mt-0.5 rounded text-nicegarden-600 focus:ring-nicegarden-500">
+                        <div>
+                            <span class="font-bold">${agent.name}</span>
+                            <span class="text-[9px] text-nicegarden-400 block">${agent.bu} • 節省 ${agent.laborHoursSaved} 小時/月</span>
+                        </div>
+                    </label>
+                `;
+            });
+        }
+
+        function openAddScenarioModal() {
+            document.getElementById('scenario-editor-title').textContent = "新增自訂決策場景";
+            document.getElementById('modal-scenario-id').value = "";
+            document.getElementById('scenario-editor-form').reset();
+            document.getElementById('modal-scenario-delete-btn').style.display = "none";
+
+            populateScenarioEditorCheckboxes([], []);
+            document.getElementById('scenario-editor-modal').style.display = "flex";
+        }
+
+        function openEditScenarioModal(id) {
+            const scen = currentScenarios.find(s => s.id === id);
+            if (!scen) return;
+
+            document.getElementById('scenario-editor-title').textContent = `編輯場景配對：${scen.title}`;
+            document.getElementById('modal-scenario-id').value = scen.id;
+            document.getElementById('modal-scenario-name').value = scen.title;
+            document.getElementById('modal-scenario-desc').value = scen.desc || '';
+            document.getElementById('modal-scenario-cloud').value = scen.cloud || 'aws';
+            document.getElementById('modal-scenario-delete-btn').style.display = "block";
+
+            populateScenarioEditorCheckboxes(scen.sources || [], scen.agents || []);
+            document.getElementById('scenario-editor-modal').style.display = "flex";
+        }
+
+        function saveScenario(event) {
+            event.preventDefault();
+            const id = document.getElementById('modal-scenario-id').value;
+            const title = document.getElementById('modal-scenario-name').value;
+            const desc = document.getElementById('modal-scenario-desc').value;
+            const cloud = document.getElementById('modal-scenario-cloud').value;
+
+            // Gather checked Sources and Agents
+            const checkedSources = document.querySelectorAll('input[name="scenario-sources"]:checked');
+            const sources = Array.from(checkedSources).map(cb => cb.value);
+
+            const checkedAgents = document.querySelectorAll('input[name="scenario-agents"]:checked');
+            const agents = Array.from(checkedAgents).map(cb => cb.value);
+
+            if (id) {
+                const index = currentScenarios.findIndex(s => s.id === id);
+                if (index !== -1) {
+                    currentScenarios[index] = { id, title, desc, cloud, sources, agents };
+                    showToast(`📝 已更新自訂場景：${title}`);
+                }
+            } else {
+                const newId = `scen-custom-${Date.now()}`;
+                currentScenarios.push({ id: newId, title, desc, cloud, sources, agents });
+                showToast(`➕ 已新增自訂場景：${title}`);
+            }
+
+            localStorage.setItem('nicegarden_scenarios', JSON.stringify(currentScenarios));
+            closeScenarioEditorModal();
+            renderScenariosList();
+        }
+
+        function deleteScenarioClick() {
+            const id = document.getElementById('modal-scenario-id').value;
+            if (!id) return;
+
+            const index = currentScenarios.findIndex(s => s.id === id);
+            if (index !== -1) {
+                const title = currentScenarios[index].title;
+                currentScenarios.splice(index, 1);
+                showToast(`🗑️ 已刪除決策場景：${title}`);
+            }
+
+            localStorage.setItem('nicegarden_scenarios', JSON.stringify(currentScenarios));
+            closeScenarioEditorModal();
+            renderScenariosList();
+        }
+
+        // --- Completely Reset Local Storage to pristine defaults ---
+        function completelyResetLocalStorage() {
+            if (confirm("🚨 警告：確定要清空所有討論數據（包含您新增的自訂系統、需求與 Agent 任務），還原為祥圃智慧營運中心的最原始初始範本嗎？")) {
+                localStorage.removeItem('nicegarden_sources');
+                localStorage.removeItem('nicegarden_outcomes');
+                localStorage.removeItem('nicegarden_agents');
+                localStorage.removeItem('nicegarden_scenarios');
+                
+                currentSources = JSON.parse(JSON.stringify(defaultSources));
+                currentOutcomes = JSON.parse(JSON.stringify(defaultOutcomes));
+                currentAgents = JSON.parse(JSON.stringify(defaultAgents));
+                currentScenarios = JSON.parse(JSON.stringify(defaultScenarios));
+                
+                activeScenario = null;
+                document.getElementById('scenario-control-bar').classList.add('hidden');
+                
+                selectCloud('aws');
+                renderSources();
+                renderOutcomes();
+                renderAgents();
+                renderScenariosList();
+                updateSpanOfControl();
+                showToast("🔄 數據庫已完全清空，並已載入祥圃原始核心數據範本！");
+            }
+        }
+
+        // Export State Backup (JSON)
+        function exportJSON() {
+            const state = {
+                sources: currentSources,
+                outcomes: currentOutcomes,
+                agents: currentAgents,
+                scenarios: currentScenarios
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "NiceGarden_IOC_Canvas_Config.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            showToast("💾 設定檔 JSON 已開始下載，可與 IOC 其他專案主管共享！");
+        }
+
+        // Custom Toast Notification System
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-slate-800 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-lg border border-slate-700 max-w-sm pointer-events-auto transition duration-300 transform translate-y-2 opacity-0 flex items-center justify-between";
+            toast.innerHTML = `
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white font-bold ml-3">✕</button>
+            `;
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-y-2');
+            }, 10);
+
+            // Auto dismiss
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
